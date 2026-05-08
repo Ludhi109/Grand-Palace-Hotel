@@ -64,7 +64,7 @@ const RoomDetails = () => {
                   <span className="ml-2 text-white">{room.rating} Rating</span>
                 </div>
                 <span>•</span>
-                <span className="flex items-center gap-1"><MapPin size={16} /> Elite View</span>
+                <span className="flex items-center gap-1"><MapPin size={16} /> Ocean Front</span>
               </div>
 
               <p className="text-white/70 leading-relaxed text-lg">
@@ -119,11 +119,11 @@ const RoomDetails = () => {
                 </div>
                 <div className="flex justify-between text-white/60">
                   <span>Service Fee</span>
-                  <span>₹{(room.price * 0.1).toLocaleString('en-IN')}</span>
+                  <span>₹500</span>
                 </div>
                 <div className="flex justify-between text-xl font-bold text-white pt-2">
                   <span>Total</span>
-                  <span className="text-luxury-gold">₹{(room.price * 3.1).toLocaleString('en-IN')}</span>
+                  <span className="text-luxury-gold">₹{(room.price * 3 + 500).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 

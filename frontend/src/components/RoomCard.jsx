@@ -16,11 +16,12 @@ const RoomCard = ({ room }) => {
           alt={room.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute top-4 left-4 bg-luxury-gold px-3 py-1 rounded-full text-luxury-black font-bold text-[10px] uppercase tracking-widest flex items-center gap-1 shadow-lg">
-          <Star size={10} className="fill-current" /> 5-Star Luxury
+        <div className="absolute top-4 left-4 bg-luxury-gold/90 text-luxury-black px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg">
+          5-Star Luxury
         </div>
-        <div className="absolute top-4 right-4 bg-luxury-black/60 backdrop-blur-md px-3 py-1 rounded-full text-luxury-gold font-bold text-sm">
-          ₹{room.price.toLocaleString('en-IN')} / Night
+        <div className="absolute top-4 right-4 bg-luxury-black/60 backdrop-blur-md px-4 py-2 rounded-lg text-luxury-gold border border-luxury-gold/20 shadow-xl">
+          <span className="text-lg font-bold">₹{room.price.toLocaleString('en-IN')}</span>
+          <span className="text-[10px] uppercase tracking-widest ml-1 opacity-70">/ Night</span>
         </div>
       </div>
 

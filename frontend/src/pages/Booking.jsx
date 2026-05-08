@@ -58,10 +58,10 @@ const Booking = () => {
                       <Hotel size={14} className="text-luxury-gold" /> Room Type
                     </label>
                     <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white">
-                      <option className="bg-luxury-dark">Royal Suite</option>
-                      <option className="bg-luxury-dark">Executive Deluxe</option>
-                      <option className="bg-luxury-dark">Presidential Villa</option>
-                      <option className="bg-luxury-dark">Classic Superior</option>
+                      <option className="bg-luxury-dark">Presidential Suite</option>
+                      <option className="bg-luxury-dark">Executive Suite</option>
+                      <option className="bg-luxury-dark">Premium Deluxe Room</option>
+                      <option className="bg-luxury-dark">Deluxe Room</option>
                     </select>
                   </div>
                   <div className="space-y-2">
