@@ -8,9 +8,26 @@ const Testimonials = () => {
   const [current, setCurrent] = useState(0);
   const [userRating, setUserRating] = useState(5);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [localTestimonials, setLocalTestimonials] = useState(testimonials);
+  const [formData, setFormData] = useState({ name: '', email: '', review: '' });
 
-  const next = () => setCurrent((prev) => (prev + 1) % testimonials.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  const next = () => setCurrent((prev) => (prev + 1) % localTestimonials.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + localTestimonials.length) % localTestimonials.length);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newReview = {
+      id: localTestimonials.length + 1,
+      name: formData.name,
+      role: "Verified Guest",
+      image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=800", // Default avatar
+      text: formData.review,
+      rating: userRating
+    };
+    setLocalTestimonials([newReview, ...localTestimonials]);
+    setIsSubmitted(true);
+    setCurrent(0); // Jump to the new review
+  };
 
   return (
     <Layout>
@@ -37,8 +54,8 @@ const Testimonials = () => {
             >
               <div className="relative inline-block">
                 <img 
-                  src={testimonials[current].image} 
-                  alt={testimonials[current].name}
+                  src={localTestimonials[current].image} 
+                  alt={localTestimonials[current].name}
                   className="w-24 h-24 rounded-full border-4 border-luxury-gold mx-auto object-cover"
                 />
                 <div className="absolute -top-2 -right-2 bg-luxury-gold text-luxury-black p-2 rounded-full">
@@ -49,15 +66,15 @@ const Testimonials = () => {
               <div className="space-y-4">
                 <div className="flex justify-center text-luxury-gold gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} className={i < testimonials[current].rating ? "fill-current" : ""} />
+                    <Star key={i} size={18} className={i < localTestimonials[current].rating ? "fill-current" : ""} />
                   ))}
                 </div>
                 <p className="text-xl md:text-3xl font-playfair italic text-white/80 leading-relaxed">
-                  "{testimonials[current].text}"
+                  "{localTestimonials[current].text}"
                 </p>
                 <div>
-                  <h4 className="text-xl font-bold text-white">{testimonials[current].name}</h4>
-                  <p className="text-luxury-gold text-sm uppercase tracking-widest mt-1">{testimonials[current].role}</p>
+                  <h4 className="text-xl font-bold text-white">{localTestimonials[current].name}</h4>
+                  <p className="text-luxury-gold text-sm uppercase tracking-widest mt-1">{localTestimonials[current].role}</p>
                 </div>
               </div>
             </motion.div>
@@ -82,7 +99,7 @@ const Testimonials = () => {
 
         {/* Indicators */}
         <div className="flex gap-2 mt-8">
-          {testimonials.map((_, idx) => (
+          {localTestimonials.map((_, idx) => (
             <div 
               key={idx}
               className={`h-1.5 transition-all duration-500 rounded-full ${idx === current ? 'w-8 bg-luxury-gold' : 'w-2 bg-white/20'}`}
@@ -109,7 +126,11 @@ const Testimonials = () => {
               <h3 className="text-3xl font-playfair font-bold text-white">Thank You!</h3>
               <p className="text-white/60">Your review has been submitted successfully. We appreciate your feedback!</p>
               <button 
-                onClick={() => setIsSubmitted(false)}
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setFormData({ name: '', email: '', review: '' });
+                  setUserRating(5);
+                }}
                 className="text-luxury-gold font-bold uppercase tracking-widest text-xs hover:underline"
               >
                 Submit another review
@@ -117,20 +138,31 @@ const Testimonials = () => {
             </motion.div>
           ) : (
             <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                setIsSubmitted(true);
-              }}
+              onSubmit={handleSubmit}
               className="glass-card p-10 space-y-8"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Full Name</label>
-                  <input required type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+                  <input 
+                    required 
+                    type="text" 
+                    placeholder="Your Name" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" 
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Email Address</label>
-                  <input required type="email" placeholder="Your Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+                  <input 
+                    required 
+                    type="email" 
+                    placeholder="Your Email" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" 
+                  />
                 </div>
               </div>
 
@@ -152,7 +184,14 @@ const Testimonials = () => {
 
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Your Review</label>
-                <textarea required rows="5" placeholder="Tell us about your experience..." className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white resize-none"></textarea>
+                <textarea 
+                  required 
+                  rows="5" 
+                  placeholder="Tell us about your experience..." 
+                  value={formData.review}
+                  onChange={(e) => setFormData({ ...formData, review: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white resize-none"
+                ></textarea>
               </div>
 
               <div className="text-center pt-4">
