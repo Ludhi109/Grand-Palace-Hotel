@@ -12,17 +12,8 @@ const RoomDetails = () => {
   
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
+  const [nights, setNights] = useState(1);
 
-  const calculateNights = () => {
-    if (!checkIn || !checkOut) return 1;
-    const start = new Date(checkIn);
-    const end = new Date(checkOut);
-    const diff = end - start;
-    const nights = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    return nights > 0 ? nights : 1;
-  };
-
-  const nights = calculateNights();
   const serviceFee = 500;
   const totalPrice = (room?.price || 0) * nights + serviceFee;
 
@@ -125,6 +116,16 @@ const RoomDetails = () => {
                     type="date" 
                     value={checkOut}
                     onChange={(e) => setCheckOut(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Total Nights</label>
+                  <input 
+                    type="number" 
+                    min="1"
+                    value={nights}
+                    onChange={(e) => setNights(parseInt(e.target.value) || 1)}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
                   />
                 </div>
