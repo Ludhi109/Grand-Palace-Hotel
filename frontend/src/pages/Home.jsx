@@ -90,9 +90,11 @@ const Home = () => {
                 <option>4 Adults</option>
               </select>
             </div>
-            <Button variant="primary" className="w-full py-3.5">
-              Check Availability
-            </Button>
+            <Link to="/rooms" className="w-full">
+              <Button variant="primary" className="w-full py-3.5">
+                Check Availability
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
