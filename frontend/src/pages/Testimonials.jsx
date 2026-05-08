@@ -6,6 +6,8 @@ import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
+  const [userRating, setUserRating] = useState(5);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const next = () => setCurrent((prev) => (prev + 1) % testimonials.length);
   const prev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -95,40 +97,71 @@ const Testimonials = () => {
             <p className="text-white/60">We value your feedback. Tell us about your stay at Grand Palace Hotel.</p>
           </div>
 
-          <form className="glass-card p-10 space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Full Name</label>
-                <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+          {isSubmitted ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="glass-card p-16 text-center space-y-6"
+            >
+              <div className="w-20 h-20 bg-luxury-gold/20 rounded-full flex items-center justify-center mx-auto text-luxury-gold">
+                <Star size={40} className="fill-current" />
               </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Email Address</label>
-                <input type="email" placeholder="Your Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Rating</label>
-              <div className="flex gap-2 text-luxury-gold">
-                {[...Array(5)].map((_, i) => (
-                  <button type="button" key={i} className="hover:scale-110 transition-transform">
-                    <Star size={24} className={i < 5 ? "fill-current" : ""} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Your Review</label>
-              <textarea rows="5" placeholder="Tell us about your experience..." className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white resize-none"></textarea>
-            </div>
-
-            <div className="text-center pt-4">
-              <button type="button" className="bg-luxury-gold text-luxury-black font-bold uppercase tracking-widest text-xs px-12 py-5 rounded-full hover:bg-white transition-all transform hover:-translate-y-1">
-                Submit Review
+              <h3 className="text-3xl font-playfair font-bold text-white">Thank You!</h3>
+              <p className="text-white/60">Your review has been submitted successfully. We appreciate your feedback!</p>
+              <button 
+                onClick={() => setIsSubmitted(false)}
+                className="text-luxury-gold font-bold uppercase tracking-widest text-xs hover:underline"
+              >
+                Submit another review
               </button>
-            </div>
-          </form>
+            </motion.div>
+          ) : (
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                setIsSubmitted(true);
+              }}
+              className="glass-card p-10 space-y-8"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Full Name</label>
+                  <input required type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Email Address</label>
+                  <input required type="email" placeholder="Your Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Rating</label>
+                <div className="flex gap-2 text-luxury-gold">
+                  {[...Array(5)].map((_, i) => (
+                    <button 
+                      type="button" 
+                      key={i} 
+                      onClick={() => setUserRating(i + 1)}
+                      className="hover:scale-120 transition-transform cursor-pointer"
+                    >
+                      <Star size={28} className={i < userRating ? "fill-current" : ""} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Your Review</label>
+                <textarea required rows="5" placeholder="Tell us about your experience..." className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white resize-none"></textarea>
+              </div>
+
+              <div className="text-center pt-4">
+                <button type="submit" className="bg-luxury-gold text-luxury-black font-bold uppercase tracking-widest text-xs px-12 py-5 rounded-full hover:bg-white transition-all transform hover:-translate-y-1">
+                  Submit Review
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </section>
     </Layout>
