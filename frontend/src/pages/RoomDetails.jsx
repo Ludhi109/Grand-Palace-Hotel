@@ -1,31 +1,15 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
 import { rooms } from '../data/data';
-import { Star, Check, Wifi, Coffee, Tv, Wind, MapPin, ArrowLeft } from 'lucide-react';
+import { Star, Check, Wifi, Coffee, Tv, Wind, MapPin, ArrowLeft, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const RoomDetails = () => {
   const { id } = useParams();
+  const [nights, setNights] = useState(1);
   const room = rooms.find(r => r.id === parseInt(id));
-
-  // State for dynamic booking
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
-
-  const nights = useMemo(() => {
-    if (!checkIn || !checkOut) return 1;
-    const start = new Date(checkIn);
-    const end = new Date(checkOut);
-    const diffTime = end.getTime() - start.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays > 0 ? diffDays : 1;
-  }, [checkIn, checkOut]);
-
-  const basePrice = room ? room.price * nights : 0;
-  const tax = basePrice * 0.12;
-  const total = basePrice + tax;
 
   if (!room) {
     return (
@@ -113,21 +97,27 @@ const RoomDetails = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Check In</label>
-                  <input 
-                    type="date" 
-                    value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
-                  />
+                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Check Out</label>
-                  <input 
-                    type="date" 
-                    value={checkOut}
-                    onChange={(e) => setCheckOut(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
-                  />
+                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1 flex items-center gap-2">
+                    <Moon size={12} className="text-luxury-gold" /> Duration of Stay
+                  </label>
+                  <div className="flex items-center gap-4">
+                    <input 
+                      type="number" 
+                      min="1" 
+                      max="30"
+                      value={nights}
+                      onChange={(e) => setNights(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white font-bold" 
+                    />
+                    <span className="text-white/60 text-sm whitespace-nowrap">Nights</span>
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Guests</label>
@@ -141,16 +131,16 @@ const RoomDetails = () => {
 
               <div className="space-y-4 pt-4 border-t border-white/10">
                 <div className="flex justify-between text-white/60">
-                  <span>₹{room.price.toLocaleString('en-IN')} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
-                  <span>₹{basePrice.toLocaleString('en-IN')}</span>
+                  <span>₹{room.price.toLocaleString('en-IN')} x {nights} {nights > 1 ? 'nights' : 'night'}</span>
+                  <span>₹{(room.price * nights).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-white/60">
                   <span>Luxury Tax (12%)</span>
-                  <span>₹{tax.toLocaleString('en-IN')}</span>
+                  <span>₹{(room.price * nights * 0.12).toLocaleString('en-IN')}</span>
                 </div>
-                <div className="flex justify-between text-xl font-bold text-white pt-2 border-t border-white/5 mt-2">
+                <div className="flex justify-between text-xl font-bold text-white pt-2">
                   <span>Total</span>
-                  <span className="text-luxury-gold">₹{total.toLocaleString('en-IN')}</span>
+                  <span className="text-luxury-gold">₹{(room.price * nights * 1.12).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 

@@ -58,10 +58,22 @@ const Booking = () => {
                       <Hotel size={14} className="text-luxury-gold" /> Room Type
                     </label>
                     <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white">
-                      <option className="bg-luxury-dark">Royal Suite</option>
-                      <option className="bg-luxury-dark">Executive Deluxe</option>
-                      <option className="bg-luxury-dark">Presidential Villa</option>
-                      <option className="bg-luxury-dark">Classic Superior</option>
+                      <option className="bg-luxury-dark">Deluxe Room</option>
+                      <option className="bg-luxury-dark">Premium Deluxe Room</option>
+                      <option className="bg-luxury-dark">Executive Suite</option>
+                      <option className="bg-luxury-dark">Presidential Suite</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1 flex items-center gap-2">
+                      <Calendar size={14} className="text-luxury-gold" /> Duration
+                    </label>
+                    <select required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white">
+                      <option className="bg-luxury-dark">1 Night</option>
+                      <option className="bg-luxury-dark">2 Nights</option>
+                      <option className="bg-luxury-dark">3 Nights</option>
+                      <option className="bg-luxury-dark">5 Nights</option>
+                      <option className="bg-luxury-dark">7+ Nights</option>
                     </select>
                   </div>
                   <div className="space-y-2">
