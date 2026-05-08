@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
@@ -9,6 +9,22 @@ import { motion } from 'framer-motion';
 const RoomDetails = () => {
   const { id } = useParams();
   const room = rooms.find(r => r.id === parseInt(id));
+  
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+
+  const calculateNights = () => {
+    if (!checkIn || !checkOut) return 1;
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+    const diff = end - start;
+    const nights = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    return nights > 0 ? nights : 1;
+  };
+
+  const nights = calculateNights();
+  const serviceFee = 500;
+  const totalPrice = (room?.price || 0) * nights + serviceFee;
 
   if (!room) {
     return (
@@ -96,11 +112,21 @@ const RoomDetails = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Check In</label>
-                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" />
+                  <input 
+                    type="date" 
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Check Out</label>
-                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" />
+                  <input 
+                    type="date" 
+                    value={checkOut}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
+                  />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Guests</label>
@@ -114,16 +140,16 @@ const RoomDetails = () => {
 
               <div className="space-y-4 pt-4 border-t border-white/10">
                 <div className="flex justify-between text-white/60">
-                  <span>₹{room.price.toLocaleString('en-IN')} x 3 nights</span>
-                  <span>₹{(room.price * 3).toLocaleString('en-IN')}</span>
+                  <span>₹{room.price.toLocaleString('en-IN')} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
+                  <span>₹{(room.price * nights).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-white/60">
                   <span>Service Fee</span>
-                  <span>₹500</span>
+                  <span>₹{serviceFee.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-xl font-bold text-white pt-2">
                   <span>Total</span>
-                  <span className="text-luxury-gold">₹{(room.price * 3 + 500).toLocaleString('en-IN')}</span>
+                  <span className="text-luxury-gold">₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
