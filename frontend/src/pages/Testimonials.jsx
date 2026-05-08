@@ -88,6 +88,49 @@ const Testimonials = () => {
           ))}
         </div>
       </section>
+      <section className="section-padding bg-white/[0.02]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl font-playfair font-bold text-white mb-4">Share Your Experience</h3>
+            <p className="text-white/60">We value your feedback. Tell us about your stay at Grand Palace Hotel.</p>
+          </div>
+
+          <form className="glass-card p-10 space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Full Name</label>
+                <input type="text" placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Email Address</label>
+                <input type="email" placeholder="Your Email" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white" />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Rating</label>
+              <div className="flex gap-2 text-luxury-gold">
+                {[...Array(5)].map((_, i) => (
+                  <button type="button" key={i} className="hover:scale-110 transition-transform">
+                    <Star size={24} className={i < 5 ? "fill-current" : ""} />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Your Review</label>
+              <textarea rows="5" placeholder="Tell us about your experience..." className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-luxury-gold text-white resize-none"></textarea>
+            </div>
+
+            <div className="text-center pt-4">
+              <button type="button" className="bg-luxury-gold text-luxury-black font-bold uppercase tracking-widest text-xs px-12 py-5 rounded-full hover:bg-white transition-all transform hover:-translate-y-1">
+                Submit Review
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
     </Layout>
   );
 };
