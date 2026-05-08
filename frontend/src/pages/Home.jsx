@@ -44,7 +44,7 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-4 mb-24 md:mb-32"
           >
             <Link to="/rooms">
               <Button variant="primary" className="px-10 py-4">
