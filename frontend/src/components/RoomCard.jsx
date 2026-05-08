@@ -16,12 +16,8 @@ const RoomCard = ({ room }) => {
           alt={room.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute top-4 left-4 bg-luxury-gold/90 text-luxury-black px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg">
-          5-Star Luxury
-        </div>
-        <div className="absolute top-4 right-4 bg-luxury-black/60 backdrop-blur-md px-4 py-2 rounded-lg text-luxury-gold border border-luxury-gold/20 shadow-xl">
-          <span className="text-lg font-bold">₹{room.price.toLocaleString('en-IN')}</span>
-          <span className="text-[10px] uppercase tracking-widest ml-1 opacity-70">/ Night</span>
+        <div className="absolute top-4 right-4 bg-luxury-black/60 backdrop-blur-md px-3 py-1 rounded-full text-luxury-gold font-bold text-sm border border-luxury-gold/20">
+          ₹{room.price.toLocaleString('en-IN')} / Night
         </div>
       </div>
 
@@ -31,9 +27,13 @@ const RoomCard = ({ room }) => {
             <span className="text-[10px] uppercase tracking-widest text-luxury-gold/80 font-bold">{room.type}</span>
             <h3 className="text-xl font-playfair font-bold text-white group-hover:text-luxury-gold transition-colors">{room.name}</h3>
           </div>
-          <div className="flex items-center text-luxury-gold text-sm">
-            <Star size={14} className="fill-current mr-1" />
-            <span>{room.rating}</span>
+          <div className="flex flex-col items-end">
+            <div className="flex items-center text-luxury-gold mb-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={12} className="fill-current" />
+              ))}
+            </div>
+            <span className="text-[10px] text-white/40 uppercase tracking-tighter">5-Star Luxury</span>
           </div>
         </div>
 

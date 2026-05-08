@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
@@ -9,13 +9,6 @@ import { motion } from 'framer-motion';
 const RoomDetails = () => {
   const { id } = useParams();
   const room = rooms.find(r => r.id === parseInt(id));
-  
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
-  const [nights, setNights] = useState(1);
-
-  const serviceFee = 500;
-  const totalPrice = (room?.price || 0) * nights + serviceFee;
 
   if (!room) {
     return (
@@ -66,12 +59,12 @@ const RoomDetails = () => {
               <div className="flex items-center gap-4 text-white/60 text-sm">
                 <div className="flex items-center text-luxury-gold">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className={i < Math.floor(room.rating) ? "fill-current" : ""} />
+                    <Star key={i} size={16} className="fill-current" />
                   ))}
-                  <span className="ml-2 text-white">{room.rating} Rating</span>
+                  <span className="ml-2 text-white">5.0 Rating</span>
                 </div>
                 <span>•</span>
-                <span className="flex items-center gap-1"><MapPin size={16} /> Ocean Front</span>
+                <span className="flex items-center gap-1"><MapPin size={16} /> Grand Palace</span>
               </div>
 
               <p className="text-white/70 leading-relaxed text-lg">
@@ -103,31 +96,11 @@ const RoomDetails = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Check In</label>
-                  <input 
-                    type="date" 
-                    value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
-                  />
+                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Check Out</label>
-                  <input 
-                    type="date" 
-                    value={checkOut}
-                    onChange={(e) => setCheckOut(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Total Nights</label>
-                  <input 
-                    type="number" 
-                    min="1"
-                    value={nights}
-                    onChange={(e) => setNights(parseInt(e.target.value) || 1)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" 
-                  />
+                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-luxury-gold text-white" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Guests</label>
@@ -141,16 +114,16 @@ const RoomDetails = () => {
 
               <div className="space-y-4 pt-4 border-t border-white/10">
                 <div className="flex justify-between text-white/60">
-                  <span>₹{room.price.toLocaleString('en-IN')} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
-                  <span>₹{(room.price * nights).toLocaleString('en-IN')}</span>
+                  <span>₹{room.price.toLocaleString('en-IN')} x 1 night</span>
+                  <span>₹{room.price.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-white/60">
-                  <span>Service Fee</span>
-                  <span>₹{serviceFee.toLocaleString('en-IN')}</span>
+                  <span>Luxury Tax</span>
+                  <span>₹{(room.price * 0.12).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-xl font-bold text-white pt-2">
                   <span>Total</span>
-                  <span className="text-luxury-gold">₹{totalPrice.toLocaleString('en-IN')}</span>
+                  <span className="text-luxury-gold">₹{(room.price * 1.12).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
