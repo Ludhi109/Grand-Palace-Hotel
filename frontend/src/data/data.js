@@ -1,13 +1,13 @@
 export const rooms = [
   {
     id: 1,
-    name: "Royal Suite",
-    type: "Suite",
-    price: 1200,
+    name: "Deluxe Room",
+    type: "Deluxe",
+    price: 4999,
     rating: 5,
     image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=2070",
-    description: "Experience ultimate luxury in our Royal Suite, featuring panoramic city views, a private jacuzzi, and personalized butler service.",
-    amenities: ["King Size Bed", "Private Jacuzzi", "Ocean View", "Free WiFi", "Butler Service", "Mini Bar"],
+    description: "Experience ultimate luxury in our Deluxe Room, featuring panoramic city views and personalized service.",
+    amenities: ["King Size Bed", "City View", "Free WiFi", "Smart TV", "Mini Bar"],
     gallery: [
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=2070",
       "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=2070",
@@ -16,12 +16,12 @@ export const rooms = [
   },
   {
     id: 2,
-    name: "Executive Deluxe",
+    name: "Premium Deluxe Room",
     type: "Deluxe",
-    price: 800,
+    price: 7999,
     rating: 4.8,
     image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=2069",
-    description: "Perfect for business travelers, our Executive Deluxe rooms offer a blend of comfort and functionality with a dedicated workspace.",
+    description: "Perfect for travelers who desire more space, our Premium Deluxe rooms offer a blend of comfort and functionality.",
     amenities: ["Queen Size Bed", "Work Desk", "City View", "Free WiFi", "Smart TV", "Coffee Machine"],
     gallery: [
       "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=2069",
@@ -31,13 +31,13 @@ export const rooms = [
   },
   {
     id: 3,
-    name: "Presidential Villa",
-    type: "Villa",
-    price: 2500,
+    name: "Executive Suite",
+    type: "Suite",
+    price: 11999,
     rating: 5,
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2070",
-    description: "A secluded sanctuary with a private pool, lush gardens, and expansive living spaces for an unforgettable stay.",
-    amenities: ["Private Pool", "3 Bedrooms", "Full Kitchen", "Private Garden", "Luxury Spa Access", "Airport Pickup"],
+    description: "A secluded sanctuary with living spaces for an unforgettable stay, perfect for business or leisure.",
+    amenities: ["Private Living Area", "King Bed", "Full Kitchen", "Luxury Spa Access", "Airport Pickup"],
     gallery: [
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2070",
       "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2070",
@@ -46,13 +46,13 @@ export const rooms = [
   },
   {
     id: 4,
-    name: "Classic Superior",
-    type: "Superior",
-    price: 450,
-    rating: 4.5,
+    name: "Presidential Suite",
+    type: "Suite",
+    price: 24999,
+    rating: 5,
     image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2070",
-    description: "Elegant and cozy, our Classic Superior rooms provide all the essential luxuries for a relaxing getaway.",
-    amenities: ["Twin Beds", "Garden View", "Free WiFi", "Smart TV", "Mini Fridge"],
+    description: "The pinnacle of luxury, featuring multiple rooms, premium amenities, and the finest views.",
+    amenities: ["Master Bedroom", "Private Office", "Private Terrace", "24/7 Butler", "Premium Bar"],
     gallery: [
       "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2070",
       "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&q=80&w=2070"

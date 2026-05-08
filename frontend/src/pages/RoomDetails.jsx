@@ -51,7 +51,7 @@ const RoomDetails = () => {
                   <h1 className="text-4xl md:text-5xl font-playfair font-bold text-white mt-2">{room.name}</h1>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-luxury-gold">${room.price}</div>
+                  <div className="text-3xl font-bold text-luxury-gold">₹{room.price.toLocaleString('en-IN')}</div>
                   <div className="text-white/40 text-xs font-bold uppercase tracking-widest">Per Night</div>
                 </div>
               </div>
@@ -64,7 +64,7 @@ const RoomDetails = () => {
                   <span className="ml-2 text-white">{room.rating} Rating</span>
                 </div>
                 <span>•</span>
-                <span className="flex items-center gap-1"><MapPin size={16} /> Ocean Front</span>
+                <span className="flex items-center gap-1"><MapPin size={16} /> Elite View</span>
               </div>
 
               <p className="text-white/70 leading-relaxed text-lg">
@@ -114,16 +114,16 @@ const RoomDetails = () => {
 
               <div className="space-y-4 pt-4 border-t border-white/10">
                 <div className="flex justify-between text-white/60">
-                  <span>$800 x 3 nights</span>
-                  <span>$2,400</span>
+                  <span>₹{room.price.toLocaleString('en-IN')} x 3 nights</span>
+                  <span>₹{(room.price * 3).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-white/60">
                   <span>Service Fee</span>
-                  <span>$50</span>
+                  <span>₹{(room.price * 0.1).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-xl font-bold text-white pt-2">
                   <span>Total</span>
-                  <span className="text-luxury-gold">$2,450</span>
+                  <span className="text-luxury-gold">₹{(room.price * 3.1).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
