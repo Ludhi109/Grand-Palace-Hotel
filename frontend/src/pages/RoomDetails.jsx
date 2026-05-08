@@ -135,12 +135,12 @@ const RoomDetails = () => {
                   <span>₹{(room.price * nights).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-white/60">
-                  <span>Luxury Tax (12%)</span>
-                  <span>₹{(room.price * nights * 0.12).toLocaleString('en-IN')}</span>
+                  <span>Luxury Tax (10%)</span>
+                  <span>₹{(room.price * nights * 0.10).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-xl font-bold text-white pt-2">
                   <span>Total</span>
-                  <span className="text-luxury-gold">₹{(room.price * nights * 1.12).toLocaleString('en-IN')}</span>
+                  <span className="text-luxury-gold">₹{(room.price * nights * 1.10).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
