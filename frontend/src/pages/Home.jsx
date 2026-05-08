@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Users, MapPin, ChevronRight } from 'lucide-react';
+import * as Icons from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
@@ -163,19 +164,21 @@ const Home = () => {
         <h2 className="text-4xl md:text-5xl font-playfair font-bold text-white mb-16">World Class <span className="text-luxury-gold">Amenities</span></h2>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-          {services.map((service) => (
-            <motion.div 
-              key={service.id}
-              whileHover={{ scale: 1.05 }}
-              className="glass p-6 rounded-2xl flex flex-col items-center gap-4 group"
-            >
-              <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-luxury-gold group-hover:bg-luxury-gold group-hover:text-luxury-black transition-all">
-                {/* Dynamically render icon - simple mapping for now */}
-                <div className="font-bold text-xl">+</div>
-              </div>
-              <span className="text-sm font-bold text-white/80 group-hover:text-luxury-gold">{service.title}</span>
-            </motion.div>
-          ))}
+          {services.map((service) => {
+            const Icon = Icons[service.icon] || Icons.Sparkles;
+            return (
+              <motion.div 
+                key={service.id}
+                whileHover={{ scale: 1.05 }}
+                className="glass p-6 rounded-2xl flex flex-col items-center gap-4 group"
+              >
+                <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-luxury-gold group-hover:bg-luxury-gold group-hover:text-luxury-black transition-all">
+                  <Icon size={24} />
+                </div>
+                <span className="text-sm font-bold text-white/80 group-hover:text-luxury-gold">{service.title}</span>
+              </motion.div>
+            );
+          })}
         </div>
         
         <Link to="/services">

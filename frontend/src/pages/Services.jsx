@@ -1,16 +1,7 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { services } from '../data/data';
-import { Waves, Droplets, Utensils, Dumbbell, Car, Wifi, Shield, Zap, Sparkles } from 'lucide-react';
-
-const iconMap = {
-  Waves: Waves,
-  Droplets: Droplets,
-  Utensils: Utensils,
-  Dumbbell: Dumbbell,
-  Car: Car,
-  Wifi: Wifi,
-};
+import * as Icons from 'lucide-react';
 
 const Services = () => {
   return (
@@ -33,7 +24,7 @@ const Services = () => {
       <section className="section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => {
-            const Icon = iconMap[service.icon] || Sparkles;
+            const Icon = Icons[service.icon] || Icons.Sparkles;
             return (
               <div key={service.id} className="glass-card group">
                 <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center text-luxury-gold mb-6 group-hover:bg-luxury-gold group-hover:text-luxury-black transition-all duration-500">
@@ -43,9 +34,12 @@ const Services = () => {
                 <p className="text-white/60 leading-relaxed text-sm">
                   {service.description} We pride ourselves on delivering exceptional {service.title.toLowerCase()} experiences that cater to the most discerning tastes.
                 </p>
-                <div className="mt-6 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-luxury-gold text-xs font-bold uppercase tracking-widest cursor-pointer hover:underline">Learn More</span>
-                </div>
+                <Link 
+                  to="/contact" 
+                  className="mt-6 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity block text-luxury-gold text-xs font-bold uppercase tracking-widest hover:underline"
+                >
+                  Learn More
+                </Link>
               </div>
             );
           })}
@@ -60,12 +54,12 @@ const Services = () => {
         </div>
         <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
-            { icon: Shield, title: "24/7 Security", desc: "Your safety is our top priority with around-the-clock professional security and surveillance." },
-            { icon: Zap, title: "Instant Check-in", desc: "Experience seamless arrival with our express digital check-in and luggage assistance." },
-            { icon: Sparkles, title: "Concierge Service", desc: "Our dedicated concierge team is available to assist with any request, no matter how small." }
+            { icon: Icons.Shield, title: "24/7 Security", desc: "Your safety is our top priority with around-the-clock professional security and surveillance." },
+            { icon: Icons.Zap, title: "Instant Check-in", desc: "Experience seamless arrival with our express digital check-in and luggage assistance." },
+            { icon: Icons.Sparkles, title: "Concierge Service", desc: "Our dedicated concierge team is available to assist with any request, no matter how small." }
           ].map((item, idx) => (
             <div key={idx} className="text-center space-y-4">
-              <div className="text-luxury-gold flex justify-center"><item.icon size={40} /></div>
+              <div className="text-luxury-gold flex justify-center">{item.icon && <item.icon size={40} />}</div>
               <h4 className="text-xl font-bold text-white">{item.title}</h4>
               <p className="text-white/40 text-sm">{item.desc}</p>
             </div>
